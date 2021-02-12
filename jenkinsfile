@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                build quietPeriod: 5, job: 'job1'
+            }
+        }
+        stage('Build') {
+            steps {
+               git credentialsId: '8034b10d-1602-4459-ab3a-c322b47a1bef', url: 'https://github.com/uaSandy/newrepo.git'
+            }
+        }
+        stage('Python') {
+            steps {
+                git credentialsId: '8034b10d-1602-4459-ab3a-c322b47a1bef', url: 'https://github.com/uaSandy/pipeline.git'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing'
+            }
+        }
+    }
+}
